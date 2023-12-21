@@ -1,0 +1,104 @@
+<%- include('partials/header'); -%>
+
+
+    <form>
+
+        <h2>Register</h2>
+
+        <label for="fname">Firstname</label>
+        <input type="text" name="fname" required />
+        <div class="email error"></div>
+
+        <label for="lname">Lastname</label>
+        <input type="text" name="lname" required />
+        <div class="email error"></div>
+
+        <label for="email">Email</label>
+        <input type="text" name="email" required />
+        <div class="email error"></div>
+
+        <label for="git">GitHub</label>
+        <input type="text" name="git" />
+
+        <div class="cv">Profile picture <br>
+            <label for="profilePicture" id="cv">Upload</label>
+            <input type="file" id="profilePicture">
+        </div>
+
+
+        <div class="cv">CV (pdf) <br>
+            <label for="myCv" id="cv">Upload</label>
+            <input type="file" id="myCv"> <!-- id!!! not a name!!! -->
+        </div>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" required />
+        <div class="password error"></div>
+
+        <label for="cpassword">Repeat Password</label>
+        <input type="password" name="cpassword" required />
+        <div class="cpassword error"></div>
+
+        <button>Register</button>
+
+        <p style="margin-top: 10px ;">Already registered ? <a href="/login" style="color: brown;">Login</a></p>
+
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        const emailError = document.querySelector(".email.error")
+        const passwordError = document.querySelector(".password.error")
+        const cpasswordError = document.querySelector(".cpassword.error")
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            // reset errors
+            emailError.textContent = "";          //clear error message above the input after success
+            passwordError.textContent = "";
+            cpasswordError.textContent = "";
+
+
+            //get the values
+            console.dir(form.myCv)
+            const email = form.email.value;
+            const myCv = form.myCv.files[0];
+            const password = form.password.value;
+            const cpassword = form.cpassword.value;
+            const firstName = form.fname.value;
+            const lastName = form.lname.value;
+            const gitHub = form.git.value;
+
+            try {
+                const res = await fetch("/register", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        email,
+                        gitHub,
+                        password,
+                        cpassword,
+                        myCv
+
+                    }),
+                    headers: { "Content-Type": "application/json" }
+                });
+                const data = await res.json();
+                console.log(data);
+                if (data.errors) {
+                    emailError.textContent = data.errors.email;          //error message above the input !!!!!!!!!!
+                    passwordError.textContent = data.errors.password;
+                    cpasswordError.textContent = data.errors.cpassword;
+                }
+                if (data.user) {
+                    location.assign("/dashboard")     //relocation to the dashboard after sign up
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+        })
+    </script>
+    <%- include('partials/footer'); -%>

@@ -1,0 +1,126 @@
+<%- include('partials/header'); -%>
+
+
+    <form>
+        <h1>
+
+        </h1>
+        <h1 style="text-align: center; margin-bottom: 70px;">Create Job</h1>
+
+        <label for="jobTitle">Job title</label>
+        <input type="text" name="jobTitle" required />
+
+        <label for="website">Website</label>
+        <input type="url" name="website" required />
+
+        <h2 style=" margin-bottom: 15px;">Employer's contact</h2>
+
+        <label for="company">Company</label>
+        <input type="text" name="company" required />
+
+        <label for="email">Email of contact</label>
+        <input type="email" name="email" />
+        <div class="email error"></div>
+
+
+        <label for="phone">Phone</label>
+        <input type="tel" name="phone" />
+
+        <label for="address">Address</label>
+        <input type="text" name="address" />
+
+
+        <label for="origin">Origin</label>
+        <select id="originList" name="origin">
+            <option value="candSpont">Spontaneous candidacy</option>
+            <option value="jobOff">Job offer</option>
+        </select>
+
+        <label for="status">Status</label>
+        <select id="status" name="status">
+            <option value="interested">Interested</option>
+            <option value="cvSent">CV sent</option>
+            <option value="negative">Negative</option>
+            <option value="interview">Interview</option>
+        </select>
+
+        <p style="margin-top: 50px; font-size: 16px;">Comments</p>
+
+        <textarea name="comments" rows="5" cols="60"></textarea>
+        <br><br>
+
+        <button>Save</button>
+
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        const emailError = document.querySelector(".email.error")
+
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            // reset errors
+            emailError.textContent = "";          //clear error message above the input after success
+
+
+
+            //get the values
+            //console.dir(form.myCv)
+            /*   const formData = new FormData(form);
+  
+              formData.forEach((value, key) => {
+                  // console.log(${ key }: ${ value });
+              }); */
+
+
+            const jobTitle = form.jobTitle.value;
+            const website = form.website.value;
+            const company = form.company.value;
+            const email = form.email.value;
+            const phone = form.phone.value;
+            const address = form.address.value;
+            const origin = form.origin.value;
+            const status = form.status.value;
+            const comments = form.comments.value;
+
+            const userId = localStorage.getItem("userId");
+            try {
+                const res = await fetch("/createJob", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        jobTitle,
+                        website,
+                        company,
+                        email,
+                        phone,
+                        address,
+                        origin,
+                        status,
+                        comments,
+                        userId,
+
+                    }),
+                    headers: { "Content-Type": "application/json" }
+                });
+                const data = await res.json();
+                console.log(data);
+                if (data.errors) {
+                    emailError.textContent = data.errors.email;          //error message above the input !!!!!!!!!!
+
+                }
+                if (data.success) {
+                    location.assign("/dashboard")     //relocation
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+        })
+        /*   function getSelectedValue() {
+            var selectValue = document.getElementById("list").value;
+            console.log(selectValue);
+        } */
+    </script>
+    <%- include('partials/footer'); -%>

@@ -1,0 +1,38 @@
+<%- include('partials/header'); -%>
+
+    <h1 style="text-align: center;">Dashboard</h1>
+    <a href="/createJob" style="color: cadetblue; margin: 0 auto; display:block; text-align: center">Create a new
+        job</a>
+
+
+    <div id="jobResults" class="jobs">
+        <%if(user){ %>
+            <ul class="jobCard_container">
+                <% jobs.forEach(note=> { %>
+                    <li>
+                        <div class="jobCard">
+                            <h5>
+                                <%= note.status %>
+                            </h5>
+                            <h2>
+                                <%= note.jobTitle %>
+                            </h2>
+                            <h3>
+                                <%= note.company %>
+                            </h3>
+
+                    </li>
+    </div>
+    <% }) %>
+        </ul>
+        <% } else{ %>
+            <h3>Here you will see your jobs...</h3>
+            <div class="button_wraper">
+                <a href="/login" class="btn">Log in</a>
+                <a href="/register" class="btn">Register</a>
+            </div>
+
+            <% } %>
+                </div>
+
+                <%- include('partials/footer'); -%>
