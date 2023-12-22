@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const Jobs = require("../models/Jobs");
 
 const requireAuth = (req, res, next) => {
    const token = req.cookies.jwt;
@@ -28,24 +27,16 @@ const checkUser = (req, res, next) => {
    if (token) {
       jwt.verify(token, "job tracker secret", async (err, decodedToken) => {
          if (err) {
-            console.log(err.message);
             res.locals.user = null;
-            res.locals.jobs = null;
             next();
          } else {
-            console.log("hello");
-            console.log(decodedToken);
-            let user = await User.findById(decodedToken.id);
-            res.locals.user = user;
-            let userJobs = await Jobs.find({ userId: String(user._id) });
-            res.locals.jobs = userJobs;
+            res.locals.user = await User.findById(decodedToken.id);
 
             next();
          }
       });
    } else {
       res.locals.user = null;
-      res.locals.jobs = null;
       next();
    }
 };

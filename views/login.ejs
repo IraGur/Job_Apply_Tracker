@@ -5,11 +5,11 @@
         <h2>Log in</h2>
 
         <label for="email">Email</label>
-        <input type="text" name="email" required />
+        <input type="text" value="ira@google.com" name="email" required />
         <div class="email error"></div>
 
         <label for="password">Password</label>
-        <input type="password" name="password" required />
+        <input type="password" value="dariko" name="password" required />
         <div class="password error"></div>
 
         <button>Log in</button>
@@ -19,7 +19,6 @@
     </form>
 
     <script>
-        console.log('sss')
         const form = document.querySelector("form");
         const emailError = document.querySelector(".email.error")
         const passwordError = document.querySelector(".password.error")

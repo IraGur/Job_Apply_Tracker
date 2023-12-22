@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const { isEmail } = require("validator");
 const bcrypt = require("bcrypt");
 
-const Test = "Test"; // что это такое ??????
-
 const userSchema = new mongoose.Schema({
    firstName: {
       type: String,

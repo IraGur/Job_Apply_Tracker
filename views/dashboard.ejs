@@ -19,19 +19,18 @@
               <h3>
                 <%= note.company %>
               </h3>
-
+              <a href="/views/jobCard.ejs">more</a>
           </li>
+      </ul>
+
+      <%}) %>
   </div>
-  <% }) %>
-    </ul>
-    <% } else{ %>
-      <h3>Here you will see your jobs...</h3>
-      <div class="button_wraper">
-        <a href="/login" class="btn">Log in</a>
-        <a href="/register" class="btn">Register</a>
+
+  <% } else{ %>
+    <h3>Here you will see your jobs...</h3>
+
+
+    <% } %>
       </div>
 
-      <% } %>
-        </div>
-
-        <%- include('partials/footer'); -%>
+      <%- include('partials/footer'); -%>

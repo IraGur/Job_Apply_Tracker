@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
 const { requireAuth, checkUser } = require("./middleware/authMiddleware");
+const { getJobs } = require("./middleware/jobsMiddleware");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -33,7 +34,9 @@ mongoose
 // 5. routes
 app.get("*", checkUser);
 app.get("/", (req, res) => res.render("login"));
-app.get("/dashboard", requireAuth, (req, res) => res.render("dashboard"));
+app.get("/dashboard", requireAuth, getJobs, (req, res) =>
+   res.render("dashboard")
+);
 app.get("/createJob", requireAuth, (req, res) => res.render("createJob"));
 app.use(authRoutes);
 
