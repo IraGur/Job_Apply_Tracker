@@ -11,15 +11,19 @@ const jobsSchema = new mongoose.Schema({
       type: String,
       required: [true, "Please enter a job title"],
    },
+   company: {
+      type: String,
+      required: [true, "Please enter a company name"],
+   },
 
    website: {
       type: String,
       required: [true, "Please enter a website"],
    },
 
-   company: {
+   name: {
       type: String,
-      required: [true, "Please enter a company name"],
+      required: [true, "Please enter a name"],
    },
 
    email: {
@@ -41,22 +45,16 @@ const jobsSchema = new mongoose.Schema({
    },
 
    address: {
-      //!!!
       type: String,
    },
 
-   origin: {
-      //!!!
+   status: {
       type: String, // You might store the path to the uploaded file or a link to it
       required: [true, "Please choose from the list"],
       //enum: ["Interested", "CV sent", "Negative", "Interview"],
    },
-   /* cloudinary_id: {
-      type: String,
-   }, */
 
-   status: {
-      //!!!
+   origin: {
       type: String, // You might store the path to the uploaded file or a link to it
       required: [true, "Please choose from the list"],
       //enum: ["Spontaneous candidacy", "Job offer"],

@@ -1,0 +1,70 @@
+<%- include('partials/header'); -%>
+
+    <div class="jobDescription">
+        <div class="jobTitle">
+            <%= job.jobTitle %>
+        </div>
+        <div class="jobInfoSection">
+            <div class="jobInfoTopSection">
+                <div class="flex">
+                    <div class="label">Company:</div>
+                    <div class="info">
+                        <%= job.company %>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="label">Website:</div>
+                    <div class="info">
+                        <%= job.website %>
+                    </div>
+                </div>
+            </div>
+            <div class="jobInfoMiddleSection">
+                <h3>Contact of the employer</h3>
+                <div class="flex">
+                    <div class="label">Name:</div>
+                    <div class="info">
+                        <%= job.name %>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="label">Email:</div>
+                    <div class="info">
+                        <%= job.email %>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="label">Phone:</div>
+                    <div class="info">
+                        <%= job.phone %>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="label">Address:</div>
+                    <div class="info">
+                        <%= job.address %>
+                    </div>
+                </div>
+            </div>
+            <div class="jobInfoBottomSection">
+                <h3 class="jobOrigin">
+                    <%= job.origin %>
+                </h3>
+                <div class="flex">
+                    <div class="label">Status:</div>
+                    <div class="info">
+                        <%= job.status %>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="label">Comment:</div>
+                    <div class="info">
+                        <%= job.comments %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('partials/footer'); -%>

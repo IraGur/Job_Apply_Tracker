@@ -8,6 +8,8 @@ const getJobs = async (req, res, next) => {
 
    if (token) {
       const userId = jwt.decode(token).id;
+
+      console.log(userId);
       const user = await User.findById(userId);
       const userJobs = await Jobs.find({ userId: String(user._id) });
       res.locals.jobs = userJobs;
@@ -18,4 +20,14 @@ const getJobs = async (req, res, next) => {
    }
 };
 
-module.exports = { getJobs };
+const getJob = async (req, res, next) => {
+   const jobId = req.params["id"];
+   try {
+      res.locals.job = await Jobs.findById(jobId);
+      next();
+   } catch (e) {
+      res.status(404).send("Not found");
+   }
+};
+
+module.exports = { getJobs, getJob };

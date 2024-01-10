@@ -1,0 +1,29 @@
+<%- include('partials/header'); -%>
+
+    <div class="my-profile">
+
+        <h3>My Profile</h3>
+
+        <div class="profile-info">
+            <div class="profile-picture">
+            </div>
+            <div class="user-info">
+                <div class="flex">
+                    <div class="label">Full name:</div>
+                    <div class="info">
+                        <%= user.firstName+" "+user.lastName %>  
+                    </div>
+                </div>
+            </div>
+            <div class=" edit-buttons">
+                            <div class="cv">
+                                <label for="myCv" id="cv">Upload new CV</label>
+                                <input type="file" id="myCv">
+                            </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <%- include('partials/footer'); -%>

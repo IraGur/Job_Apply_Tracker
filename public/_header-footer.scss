@@ -1,0 +1,65 @@
+nav {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-end;
+
+   ul {
+      display: flex;
+      align-items: center;
+
+      li {
+         margin-left: 8px;
+         margin-right: 8px;
+
+         a {
+            display: block;
+         }
+      }
+   }
+}
+
+header {
+   display: flex;
+   align-items: center;
+}
+header img {
+   width: 250px;
+   margin-right: 40px;
+}
+header h2 {
+   font-size: 3em;
+   margin-bottom: 10px;
+}
+header h3 {
+   font-size: 1.6em;
+   margin-bottom: 10px;
+   margin-left: 2px;
+   color: #999;
+}
+header .btn {
+   margin-top: 20px;
+   padding: 12px 18px;
+   text-transform: uppercase;
+   font-weight: bold;
+   display: inline-block;
+   font-size: 0.8em;
+}
+
+footer {
+   height: 40px;
+   text-align: center;
+   color: #aaa;
+}
+
+.profile-icon {
+   background-image: url("/icons/user2.png");
+   background-size: auto 100%;
+   background-repeat: no-repeat;
+   padding: 15px;
+}
+.logout-icon {
+   background-image: url("/icons/logout2.png");
+   background-size: auto 100%;
+   background-repeat: no-repeat;
+   padding: 13px;
+}

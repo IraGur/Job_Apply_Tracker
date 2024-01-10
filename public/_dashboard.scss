@@ -1,0 +1,21 @@
+// dashboard
+.jobs {
+   margin: 40px 20px 0;
+
+   .jobCard_container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      .jobCard {
+         background-color: white;
+
+         border: 1px solid rgba(235, 240, 235, 1);
+         margin-right: 10px;
+         .interested {
+            background-color: yellow;
+         }
+         .cvSent {
+            background-color: red;
+         }
+      }
+   }
+}

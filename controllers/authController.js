@@ -1,7 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../utils/cloudinary");
-const upload = require("../utils/multer");
 
 // handle errors
 const handleErrors = (err, req) => {
@@ -71,9 +70,26 @@ module.exports.logout_get = (req, res) => {
 
 // REGISTER_POST
 module.exports.register_post = async (req, res) => {
-   const { firstName, lastName, email, gitHub, password, cpassword, myCv } =
-      req.body;
+   const {
+      firstName,
+      lastName,
+      email,
+      gitHub,
+      password,
+      cpassword,
+      myCv,
+      profilePicture,
+   } = req.body;
    //TODO - move to schema virtual field
+
+   // First try upload files
+   try {
+      await cloudinary.uploader.upload(myCv, { folder: email });
+      await cloudinary.uploader.upload(profilePicture, { folder: email });
+   } catch (e) {
+      console.log("ERROR FROM UPLOAD", e);
+   }
+
    if (password !== cpassword) {
       res.status(400).json({
          errors: { cpassword: "the password doesn't match" },
@@ -86,7 +102,6 @@ module.exports.register_post = async (req, res) => {
             email,
             gitHub,
             password,
-            myCv,
          });
          const token = createToken(user._id);
          res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });

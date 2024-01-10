@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
 const { requireAuth, checkUser } = require("./middleware/authMiddleware");
-const { getJobs } = require("./middleware/jobsMiddleware");
+const { getJobs, getJob } = require("./middleware/jobsMiddleware");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -11,7 +11,7 @@ const app = express();
 
 // 2. middleware
 app.use(express.static("public"));
-app.use(express.json()); // , express.urlencoded({extended: true})
+app.use(express.json({ limit: "50mb" })); // , express.urlencoded({extended: true})
 app.use(cookieParser());
 app.disable("view cache");
 
@@ -37,7 +37,14 @@ app.get("/", (req, res) => res.render("login"));
 app.get("/dashboard", requireAuth, getJobs, (req, res) =>
    res.render("dashboard")
 );
-app.get("/createJob", requireAuth, (req, res) => res.render("createJob"));
+app.get("/dashboard/createJob", requireAuth, (req, res) =>
+   res.render("createJob")
+);
+app.get("/dashboard/jobCard/:id", requireAuth, getJob, (req, res) =>
+   res.render("jobCard")
+);
+app.get("/myProfile", requireAuth, (req, res) => res.render("myProfile"));
+
 app.use(authRoutes);
 
 /* 

@@ -50,6 +50,27 @@
         const emailError = document.querySelector(".email.error")
         const passwordError = document.querySelector(".password.error")
         const cpasswordError = document.querySelector(".cpassword.error")
+        const files = {
+            myCv: '',
+            profilePicture: ''
+        }
+
+        const assignFile = (kind, file) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                files[kind] = reader.result;
+            }
+        }
+
+        form.profilePicture.addEventListener('change', (e) => {
+            assignFile('profilePicture', e.target.files[0])
+        })
+
+        form.myCv.addEventListener('change', (e) => {
+            assignFile('myCv', e.target.files[0])
+        })
+
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -60,14 +81,13 @@
 
 
             //get the values
-            console.dir(form.myCv)
             const email = form.email.value;
-            const myCv = form.myCv.files[0];
             const password = form.password.value;
             const cpassword = form.cpassword.value;
             const firstName = form.fname.value;
             const lastName = form.lname.value;
             const gitHub = form.git.value;
+
 
             try {
                 const res = await fetch("/register", {
@@ -79,19 +99,18 @@
                         gitHub,
                         password,
                         cpassword,
-                        myCv
-
+                        ...files
                     }),
                     headers: { "Content-Type": "application/json" }
                 });
                 const data = await res.json();
-                console.log(data);
                 if (data.errors) {
                     emailError.textContent = data.errors.email;          //error message above the input !!!!!!!!!!
                     passwordError.textContent = data.errors.password;
                     cpasswordError.textContent = data.errors.cpassword;
                 }
                 if (data.user) {
+                    localStorage.setItem("userId", data.user);
                     location.assign("/dashboard")     //relocation to the dashboard after sign up
                 }
             }

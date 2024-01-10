@@ -1,29 +1,30 @@
 <%- include('partials/header'); -%>
 
   <h1 style="text-align: center;">Dashboard</h1>
-  <a href="/createJob" style="color: cadetblue; margin: 0 auto; display:block; text-align: center">Create a new job</a>
+  <a href="/dashboard/createJob" style="color: cadetblue; margin: 0 auto; display:block; text-align: center">Create a
+    new
+    job</a>
 
 
   <div id="jobResults" class="jobs">
     <%if(user){ %>
       <ul class="jobCard_container">
-        <% jobs.forEach(note=> { %>
+        <% jobs.forEach(job=> { %>
           <li>
             <div class="jobCard">
-              <h5>
-                <%= note.status %>
-              </h5>
+              <div class="jobStatus <%= job.status %>">
+                <%= job.status %>
+              </div>
               <h2>
-                <%= note.jobTitle %>
+                <%= job.jobTitle %>
               </h2>
               <h3>
-                <%= note.company %>
+                <%= job.company %>
               </h3>
-              <a href="/views/jobCard.ejs">more</a>
+              <a href="<%= `/dashboard/jobCard/${job._id}` %>">Details</a>
           </li>
+          <%}) %>
       </ul>
-
-      <%}) %>
   </div>
 
   <% } else{ %>
@@ -32,5 +33,4 @@
 
     <% } %>
       </div>
-
       <%- include('partials/footer'); -%>

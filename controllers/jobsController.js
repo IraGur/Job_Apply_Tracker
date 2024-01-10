@@ -3,16 +3,17 @@ const Jobs = require("../models/Jobs");
 // handle errors
 
 // JOB_GET
-module.exports.createJob_get = (req, res) => {
+/* module.exports.createJob_get = (req, res) => {
    res.render("createJob");
 };
-
+ */
 // JOB_POST
 module.exports.createJob_post = async (req, res) => {
    const {
       jobTitle,
       website,
       company,
+      name,
       email,
       phone,
       address,
@@ -27,6 +28,7 @@ module.exports.createJob_post = async (req, res) => {
          jobTitle,
          website,
          company,
+         name,
          email,
          phone,
          address,

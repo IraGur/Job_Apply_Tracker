@@ -10,13 +10,17 @@
         <label for="jobTitle">Job title</label>
         <input type="text" name="jobTitle" required />
 
+        <label for="company">Company</label>
+        <input type="text" name="company" required />
+
         <label for="website">Website</label>
         <input type="url" name="website" required />
 
         <h2 style=" margin-bottom: 15px;">Employer's contact</h2>
 
-        <label for="company">Company</label>
-        <input type="text" name="company" required />
+
+        <label for="name">Name</label>
+        <input type="text" name="name" required />
 
         <label for="email">Email of contact</label>
         <input type="email" name="email" />
@@ -66,17 +70,11 @@
 
 
             //get the values
-            //console.dir(form.myCv)
-            /*   const formData = new FormData(form);
-  
-              formData.forEach((value, key) => {
-                  // console.log(${ key }: ${ value });
-              }); */
-
 
             const jobTitle = form.jobTitle.value;
             const website = form.website.value;
             const company = form.company.value;
+            const name = form.name.value;
             const email = form.email.value;
             const phone = form.phone.value;
             const address = form.address.value;
@@ -92,6 +90,7 @@
                         jobTitle,
                         website,
                         company,
+                        name,
                         email,
                         phone,
                         address,
