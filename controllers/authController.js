@@ -83,9 +83,16 @@ module.exports.register_post = async (req, res) => {
    //TODO - move to schema virtual field
 
    // First try upload files
+   let profilePictureResponse;
+
    try {
       await cloudinary.uploader.upload(myCv, { folder: email });
-      await cloudinary.uploader.upload(profilePicture, { folder: email });
+      profilePictureResponse = await cloudinary.uploader.upload(
+         profilePicture,
+         {
+            folder: email,
+         }
+      );
    } catch (e) {
       console.log("ERROR FROM UPLOAD", e);
    }
@@ -102,6 +109,7 @@ module.exports.register_post = async (req, res) => {
             email,
             gitHub,
             password,
+            profilePicture: profilePictureResponse.url,
          });
          const token = createToken(user._id);
          res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });

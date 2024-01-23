@@ -1,29 +1,48 @@
 <%- include('partials/header'); -%>
 
     <div class="my-profile">
-
         <h3>My Profile</h3>
 
         <div class="profile-info">
             <div class="profile-picture">
+                <img src="<%= user.profilePicture %>" alt="" />
             </div>
             <div class="user-info">
                 <div class="flex">
                     <div class="label">Full name:</div>
                     <div class="info">
-                        <%= user.firstName+" "+user.lastName %>  
-                    </div>
-                </div>
-            </div>
-            <div class=" edit-buttons">
-                            <div class="cv">
-                                <label for="myCv" id="cv">Upload new CV</label>
-                                <input type="file" id="myCv">
+                        <%= user.firstName+" "+user.lastName %></div>
+         </div>
+         <div class=" flex">
+                            <div class="label">Email:</div>
+                            <div class="info">
+                                <%= user.email %>
                             </div>
-
+                    </div>
+                    <div class="flex">
+                        <div class="label">GitHub:</div>
+                        <div class="info">
+                            <%= user.gitHub %>
+                        </div>
                     </div>
                 </div>
+                <div class="edit-buttons">
+                    <div class="">
+                        <label for="myCv" id="cv">Download CV</label>
+                        <input type="file" id="myCv" />
+                    </div>
+                    <div class="">
+                        <label for="myCv" id="cv">Upload new CV</label>
+                        <input type="file" id="myCv" />
+                    </div>
+                    <div class="">
+                        <label for="myCv" id="cv">Change password</label>
+                        <input type="file" id="myCv" />
+                    </div>
 
+                    <!-- <button id="myCv">Change password</button> -->
+                </div>
             </div>
+        </div>
 
-            <%- include('partials/footer'); -%>
+        <%- include('partials/footer'); -%>

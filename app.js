@@ -28,7 +28,7 @@ mongoose
       useCreateIndex: true,
       useFindAndModify: false,
    })
-   .then((result) => app.listen(3000))
+   .then(() => app.listen(3002))
    .catch((err) => console.log(err));
 
 // 5. routes
